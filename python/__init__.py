@@ -2,7 +2,7 @@
 import base64
 import json
 import numpy
-import urllib.request
+import urllib2
 import uuid
 
 from . import png
@@ -18,11 +18,11 @@ def uid():
 
 def send(**command):
   command = json.dumps(command)
-  req = urllib.request.Request(URL, method='POST')
+  req = urllib2.Request(URL)
   req.add_header('Content-Type', 'application/text')
   req.data = command.encode('ascii')
   try:
-    resp = urllib.request.urlopen(req)
+    resp = urllib2.urlopen(req)
     return resp != None
   except:
     raise
